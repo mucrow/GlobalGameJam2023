@@ -23,11 +23,10 @@ public class PlayerController: MonoBehaviour {
   void Update() {
     // Left Arrow, Right Arrow, the A key, or the D key. works for gamepads too
     var runInput = Input.GetAxis("Horizontal");
+    var isDownPressed = Input.GetAxis("Vertical"); 
 
     // spacebar
     var isJumpPressed = Input.GetButton("Jump");
-    var isDownPressed = Input.GetKeyDown(KeyCode.S); // is there no Down enum? lol
-
 
     // this is left mouse button. i call the action "build" ("Fire1" is the name of the left mouse
     // button input in Unity default input mapping)
@@ -81,18 +80,30 @@ public class PlayerController: MonoBehaviour {
       // modify the world
       _tilemap.SetTile(pos, tileData);
     }
-
+    
    // if the player pressed the dig button...
     if (isDigPressed) {
       var tileData = FindATile();
+      Vector3Int pos = new Vector3Int(0, 0, 0);
 
-      // if ()
-      // use the player's position to determine the target position of the tile we're placing
-      // basically it's (player.x, player.y - 1)
-      var pos = new Vector3Int(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y - 1), 0);
+      //dig below
+      if (Math.Abs(isDownPressed) > 0.1) {
+        Debug.Log("down");
+        // use the player's position to determine the target position of the tile we're placing
+        // basically it's (player.x, player.y - 1)
+        pos = new Vector3Int(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y - 1), 0);
+        _tilemap.SetTile(pos, null);
+      } 
+      //dig to the side
+      else if (Math.Abs(runInput) > 0.1) {
+        Debug.Log("side");
+
+        // need to check rotation of the character (facing forward or back)
+        pos = new Vector3Int(Mathf.FloorToInt(transform.position.x + 1), Mathf.FloorToInt(transform.position.y), 0);
+        _tilemap.SetTile(pos, null);
+      }
 
       // modify the world
-      _tilemap.SetTile(pos, null);
     }
 
   }
