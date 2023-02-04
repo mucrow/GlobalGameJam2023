@@ -17,6 +17,8 @@ public class PlayerController: MonoBehaviour {
   TriggerState _onGroundTrigger;
   [SerializeField]
   Tilemap _tilemap;
+  
+  bool facingRight = true;
 
   Vector2 _velocity = Vector2.zero;
 
@@ -36,10 +38,15 @@ public class PlayerController: MonoBehaviour {
     var onGround = _onGroundTrigger.IsEntered();
 
     // 0.1 is the analog stick deadzone for running
-    if (Math.Abs(runInput) > 0.1) {
+    if (Math.Abs(runInput) > 0.1 && !facingRight) {
+      Flip();
       // run if there's an input
       _velocity.x = runInput * RunSpeed;
-    }
+    } else if (Math.Abs(runInput) > 0.1 && facingRight){
+      Flip();
+      // run if there's an input
+      _velocity.x = runInput * RunSpeed;
+    } 
     else {
       // stop if there isn't
       _velocity.x = 0;
@@ -99,7 +106,11 @@ public class PlayerController: MonoBehaviour {
         Debug.Log("side");
 
         // need to check rotation of the character (facing forward or back)
+        if (facingRight) {
         pos = new Vector3Int(Mathf.FloorToInt(transform.position.x + 1), Mathf.FloorToInt(transform.position.y), 0);
+        } else {
+        pos = new Vector3Int(Mathf.FloorToInt(transform.position.x - 1), Mathf.FloorToInt(transform.position.y), 0);
+        }
         _tilemap.SetTile(pos, null);
       }
 
@@ -108,6 +119,15 @@ public class PlayerController: MonoBehaviour {
 
   }
 
+  void Flip() {
+    Debug.Log("Flipped");
+    Vector3 currentScale = gameObject.transform.localScale;
+    currentScale.x *= -1;
+    gameObject.transform.localScale = currentScale;
+    
+    facingRight = !facingRight;
+  }
+  
   // returns a non-empty tile in the range of (-10, -10) to (10, 10) in the world
   TileBase FindATile() {
     for (int y = -10; y < 10; ++y) {
