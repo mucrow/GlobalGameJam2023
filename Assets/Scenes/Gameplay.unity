@@ -951,6 +951,7 @@ MonoBehaviour:
   RunSpeed: 4
   _rigidbody2D: {fileID: 1586941848}
   _onGroundTrigger: {fileID: 250289763}
+  _tilemap: {fileID: 749288590}
 --- !u!50 &1586941848
 Rigidbody2D:
   serializedVersion: 4
