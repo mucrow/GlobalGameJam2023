@@ -17,7 +17,7 @@ public class PlayerController: MonoBehaviour {
   TriggerState _onGroundTrigger;
   [SerializeField]
   Tilemap _tilemap;
-  
+
   bool facingRight = true;
 
   Vector2 _velocity = Vector2.zero;
@@ -85,6 +85,8 @@ public class PlayerController: MonoBehaviour {
       var pos = new Vector3Int(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y - 1), 0);
 
       // modify the world
+
+      // TODO: if condition for when tile already existing
       _tilemap.SetTile(pos, tileData);
     }
     
