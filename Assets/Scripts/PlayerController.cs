@@ -86,8 +86,9 @@ public class PlayerController: MonoBehaviour {
 
       // modify the world
 
-      // TODO: if condition for when tile already existing
-      _tilemap.SetTile(pos, tileData);
+      if (!_tilemap.HasTile(pos)) {
+        _tilemap.SetTile(pos, tileData);
+      }
     }
     
    // if the player pressed the dig button...
