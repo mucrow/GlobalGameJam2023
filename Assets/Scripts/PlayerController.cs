@@ -25,6 +25,7 @@ public class PlayerController: MonoBehaviour {
   void Update() {
     // Left Arrow, Right Arrow, the A key, or the D key. works for gamepads too
     var runInput = Input.GetAxis("Horizontal");
+    var inputHorizontal = Input.GetAxisRaw("Horizontal");
     var isDownPressed = Input.GetAxis("Vertical"); 
 
     // spacebar
@@ -37,15 +38,17 @@ public class PlayerController: MonoBehaviour {
     var isDigPressed = Input.GetButtonDown("Fire2");
     var onGround = _onGroundTrigger.IsEntered();
 
+
     // 0.1 is the analog stick deadzone for running
-    if (Math.Abs(runInput) > 0.1 && !facingRight) {
-      Flip();
+    if (Math.Abs(runInput) > 0.1) {
       // run if there's an input
       _velocity.x = runInput * RunSpeed;
-    } else if (Math.Abs(runInput) > 0.1 && facingRight){
-      Flip();
-      // run if there's an input
-      _velocity.x = runInput * RunSpeed;
+      if (inputHorizontal > 0 && !facingRight) {
+        Flip();
+      }
+      if (inputHorizontal < 0 && facingRight) { 
+        Flip();
+      }
     } 
     else {
       // stop if there isn't
@@ -110,9 +113,9 @@ public class PlayerController: MonoBehaviour {
 
         // need to check rotation of the character (facing forward or back)
         if (facingRight) {
-        pos = new Vector3Int(Mathf.FloorToInt(transform.position.x + 1), Mathf.FloorToInt(transform.position.y), 0);
+          pos = new Vector3Int(Mathf.FloorToInt(transform.position.x + 1), Mathf.FloorToInt(transform.position.y), 0);
         } else {
-        pos = new Vector3Int(Mathf.FloorToInt(transform.position.x - 1), Mathf.FloorToInt(transform.position.y), 0);
+          pos = new Vector3Int(Mathf.FloorToInt(transform.position.x - 1), Mathf.FloorToInt(transform.position.y), 0);
         }
         _tilemap.SetTile(pos, null);
       }

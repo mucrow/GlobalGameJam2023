@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: New Layer BG
+    uniqueID: 3824424181
+    locked: 0
+  - name: Environment
+    uniqueID: 2822037983
+    locked: 0
+  - name: Objects
+    uniqueID: 3478662917
+    locked: 0
