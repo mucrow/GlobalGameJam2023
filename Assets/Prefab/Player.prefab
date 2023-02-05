@@ -733,8 +733,8 @@ MonoBehaviour:
   _rigidbody2D: {fileID: 8148250776213572909}
   _onGroundTrigger: {fileID: 8148250775416413398}
   _env: {fileID: 0}
-  _downSlashAnimation: {fileID: 0}
-  _forwardSlashAnimation: {fileID: 0}
+  _downSlashAnimation: {fileID: 1568640298962379229}
+  _forwardSlashAnimation: {fileID: 1463572399957964721}
   _idleAnimation: {fileID: 1390180228225158335}
   _runAnimation: {fileID: 5815105314499268247}
 --- !u!50 &8148250776213572909

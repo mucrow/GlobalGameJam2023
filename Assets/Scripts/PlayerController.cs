@@ -36,7 +36,7 @@ public class PlayerController: MonoBehaviour {
     // Left Arrow, Right Arrow, the A key, or the D key. works for gamepads too
     var runInput = Input.GetAxis("Horizontal");
     var inputHorizontal = Input.GetAxisRaw("Horizontal");
-    var isDownPressed = Input.GetAxis("Vertical"); 
+    var isDownPressed = Input.GetAxis("Vertical");
 
     // spacebar
     var isJumpPressed = Input.GetButton("Jump");
@@ -98,6 +98,12 @@ public class PlayerController: MonoBehaviour {
    // if the player pressed the dig button...
     if (isDigPressed) {
       _env.digTile(transform, facingRight, isDownPressed);
+      if (isDownPressed < -0.1) {
+        SetAnimationToDownSlash();
+      }
+      else {
+        SetAnimationToForwardSlash();
+      }
     }
 
   }
