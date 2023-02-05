@@ -27,4 +27,10 @@ public class LoopingSpriteAnimator: MonoBehaviour {
       _timeToNextFrame += _timePerFrame;
     }
   }
+
+  public void ResetAnimation() {
+    _currentFrame = 0;
+    _renderer.sprite = _animationFrames[_currentFrame];
+    _timeToNextFrame = _timePerFrame;
+  }
 }

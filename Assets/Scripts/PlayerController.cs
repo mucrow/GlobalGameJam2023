@@ -21,16 +21,18 @@ public class PlayerController: MonoBehaviour {
 
   bool facingRight = true;
 
+  bool wasRunningLastFrame = false;
+
   Vector2 _velocity = Vector2.zero;
 
   [SerializeField]
-  GameObject _downSlashAnimation;
+  LoopingSpriteAnimator _downSlashAnimation;
   [SerializeField]
-  GameObject _forwardSlashAnimation;
+  LoopingSpriteAnimator _forwardSlashAnimation;
   [SerializeField]
-  GameObject _idleAnimation;
+  LoopingSpriteAnimator _idleAnimation;
   [SerializeField]
-  GameObject _runAnimation;
+  LoopingSpriteAnimator _runAnimation;
 
   void Update() {
     // Left Arrow, Right Arrow, the A key, or the D key. works for gamepads too
@@ -53,6 +55,7 @@ public class PlayerController: MonoBehaviour {
     if (Math.Abs(runInput) > 0.1) {
       // run if there's an input
       _velocity.x = runInput * RunSpeed;
+      wasRunningLastFrame = true;
       if (inputHorizontal > 0 && !facingRight) {
         Flip();
         SetAnimationToRun();
@@ -62,10 +65,11 @@ public class PlayerController: MonoBehaviour {
         SetAnimationToRun();
       }
     } 
-    else {
+    else if (wasRunningLastFrame) {
       // stop if there isn't
       _velocity.x = 0;
       SetAnimationToIdle();
+      wasRunningLastFrame = false;
     }
 
     // if the player is on the ground...
@@ -117,30 +121,36 @@ public class PlayerController: MonoBehaviour {
   }
 
   void SetAnimationToIdle() {
-    _downSlashAnimation.SetActive(false);
-    _forwardSlashAnimation.SetActive(false);
-    _runAnimation.SetActive(false);
-    _idleAnimation.SetActive(true);
+    _downSlashAnimation.gameObject.SetActive(false);
+    _forwardSlashAnimation.gameObject.SetActive(false);
+    _runAnimation.gameObject.SetActive(false);
+    _idleAnimation.gameObject.SetActive(true);
   }
 
   void SetAnimationToRun() {
-    _downSlashAnimation.SetActive(false);
-    _forwardSlashAnimation.SetActive(false);
-    _idleAnimation.SetActive(false);
-    _runAnimation.SetActive(true);
+    _downSlashAnimation.gameObject.SetActive(false);
+    _forwardSlashAnimation.gameObject.SetActive(false);
+    _idleAnimation.gameObject.SetActive(false);
+    _runAnimation.gameObject.SetActive(true);
   }
 
   void SetAnimationToDownSlash() {
-    _forwardSlashAnimation.SetActive(false);
-    _runAnimation.SetActive(false);
-    _idleAnimation.SetActive(false);
-    _downSlashAnimation.SetActive(true);
+    _forwardSlashAnimation.gameObject.SetActive(false);
+    _runAnimation.gameObject.SetActive(false);
+    _idleAnimation.gameObject.SetActive(false);
+    if (!_downSlashAnimation.gameObject.activeInHierarchy) {
+      _downSlashAnimation.gameObject.SetActive(true);
+      _downSlashAnimation.ResetAnimation();
+    }
   }
 
   void SetAnimationToForwardSlash() {
-    _downSlashAnimation.SetActive(false);
-    _runAnimation.SetActive(false);
-    _idleAnimation.SetActive(false);
-    _forwardSlashAnimation.SetActive(true);
+    _downSlashAnimation.gameObject.SetActive(false);
+    _runAnimation.gameObject.SetActive(false);
+    _idleAnimation.gameObject.SetActive(false);
+    if (!_forwardSlashAnimation.gameObject.activeInHierarchy) {
+      _forwardSlashAnimation.gameObject.SetActive(true);
+      _forwardSlashAnimation.ResetAnimation();
+    }
   }
 }
