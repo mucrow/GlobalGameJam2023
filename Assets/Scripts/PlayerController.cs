@@ -31,11 +31,11 @@ public class PlayerController: MonoBehaviour {
     // spacebar
     var isJumpPressed = Input.GetButton("Jump");
 
-    // this is left mouse button. i call the action "build" ("Fire1" is the name of the left mouse
+    // this is left mouse button. i call the action "dig" ("Fire1" is the name of the left mouse
     // button input in Unity default input mapping)
-    var isBuildPressed = Input.GetButtonDown("Fire1");
-    // right mouse button to dig
-    var isDigPressed = Input.GetButtonDown("Fire2");
+    var isDigPressed = Input.GetButtonDown("Fire1");
+    // right mouse button to "build"
+    var isBuildPressed = Input.GetButtonDown("Fire2");
     var onGround = _onGroundTrigger.IsEntered();
 
 
@@ -101,7 +101,6 @@ public class PlayerController: MonoBehaviour {
 
       //dig below
       if (Math.Abs(isDownPressed) > 0.1) {
-        Debug.Log("down");
         // use the player's position to determine the target position of the tile we're placing
         // basically it's (player.x, player.y - 1)
         pos = new Vector3Int(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y - 1), 0);
@@ -109,8 +108,6 @@ public class PlayerController: MonoBehaviour {
       } 
       //dig to the side
       else if (Math.Abs(runInput) > 0.1) {
-        Debug.Log("side");
-
         // need to check rotation of the character (facing forward or back)
         if (facingRight) {
           pos = new Vector3Int(Mathf.FloorToInt(transform.position.x + 1), Mathf.FloorToInt(transform.position.y), 0);
@@ -126,7 +123,6 @@ public class PlayerController: MonoBehaviour {
   }
 
   void Flip() {
-    Debug.Log("Flipped");
     Vector3 currentScale = gameObject.transform.localScale;
     currentScale.x *= -1;
     gameObject.transform.localScale = currentScale;
