@@ -137,6 +137,111 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: bilbo idle sprites_1
+      rect:
+        serializedVersion: 2
+        x: 6151
+        y: 5756
+        width: 1261
+        height: 2394
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e80097c37099aaf45976709a47fe3a5a
+      internalID: -1040466116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bilbo idle sprites_2
+      rect:
+        serializedVersion: 2
+        x: 7482
+        y: 5766
+        width: 1232
+        height: 2404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4540221c7138c81419223dbf092dfde7
+      internalID: 216195966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bilbo idle sprites_3
+      rect:
+        serializedVersion: 2
+        x: 1799
+        y: 3352
+        width: 1351
+        height: 2374
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58162450270a9ac43a038d8902c83adb
+      internalID: -867856124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bilbo idle sprites_4
+      rect:
+        serializedVersion: 2
+        x: 10879
+        y: 3312
+        width: 1431
+        height: 2335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 196c3182492c2ec45ab4868e3f3623b9
+      internalID: -1473515869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bilbo idle sprites_5
+      rect:
+        serializedVersion: 2
+        x: 7909
+        y: 888
+        width: 1411
+        height: 2305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 749050e143350014ea7fb29dfb46d6bb
+      internalID: -1446666538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -149,6 +254,11 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       bilbo idle sprites_0: 1011201001
+      bilbo idle sprites_2: 216195966
+      bilbo idle sprites_1: -1040466116
+      bilbo idle sprites_4: -1473515869
+      bilbo idle sprites_5: -1446666538
+      bilbo idle sprites_3: -867856124
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
