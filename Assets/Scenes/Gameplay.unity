@@ -630,6 +630,7 @@ GameObject:
   - component: {fileID: 1125397694}
   - component: {fileID: 1125397696}
   - component: {fileID: 1125397695}
+  - component: {fileID: 1125397697}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -716,6 +717,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1125397697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125397693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb17083cbb51eb84ab6b5d0cea419547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileMap: {fileID: 0}
+  bedrock: {fileID: 0}
+  dirt: {fileID: 0}
+  _tilemap: {fileID: 749288590}
 --- !u!1 &1511629848
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,6 +1007,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8148250776213572898, guid: a7f73b28e9589bf4ea53b9963cbf7701, type: 3}
+      propertyPath: _env
+      value: 
+      objectReference: {fileID: 1125397697}
     - target: {fileID: 8148250776213572898, guid: a7f73b28e9589bf4ea53b9963cbf7701, type: 3}
       propertyPath: _tilemap
       value: 

@@ -15,8 +15,9 @@ public class PlayerController: MonoBehaviour {
   Rigidbody2D _rigidbody2D;
   [SerializeField]
   TriggerState _onGroundTrigger;
+
   [SerializeField]
-  Tilemap _tilemap;
+  EnvironmentController _env;
 
   bool facingRight = true;
 
@@ -79,45 +80,12 @@ public class PlayerController: MonoBehaviour {
 
     // if the player pressed the build button...
     if (isBuildPressed) {
-      // this is debugging code. i don't know how to access tile data correctly (so the player
-      // knows what tile theyre placing) so i just find a non-empty tile in the level and use that
-      var tileData = FindATile();
-
-      // use the player's position to determine the target position of the tile we're placing
-      // basically it's (player.x, player.y - 1)
-      var pos = new Vector3Int(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y - 1), 0);
-
-      // modify the world
-
-      if (!_tilemap.HasTile(pos)) {
-        _tilemap.SetTile(pos, tileData);
-      }
+      _env.buildTile(transform);
     }
     
    // if the player pressed the dig button...
     if (isDigPressed) {
-      var tileData = FindATile();
-      Vector3Int pos = new Vector3Int(0, 0, 0);
-
-      //dig below
-      if (Math.Abs(isDownPressed) > 0.1) {
-        // use the player's position to determine the target position of the tile we're placing
-        // basically it's (player.x, player.y - 1)
-        pos = new Vector3Int(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y - 1), 0);
-        _tilemap.SetTile(pos, null);
-      } 
-      //dig to the side
-      else if (Math.Abs(runInput) > 0.1) {
-        // need to check rotation of the character (facing forward or back)
-        if (facingRight) {
-          pos = new Vector3Int(Mathf.FloorToInt(transform.position.x + 1), Mathf.FloorToInt(transform.position.y), 0);
-        } else {
-          pos = new Vector3Int(Mathf.FloorToInt(transform.position.x - 1), Mathf.FloorToInt(transform.position.y), 0);
-        }
-        _tilemap.SetTile(pos, null);
-      }
-
-      // modify the world
+      _env.digTile(transform, facingRight, isDownPressed);
     }
 
   }
@@ -129,18 +97,5 @@ public class PlayerController: MonoBehaviour {
     
     facingRight = !facingRight;
   }
-  
-  // returns a non-empty tile in the range of (-10, -10) to (10, 10) in the world
-  TileBase FindATile() {
-    for (int y = -10; y < 10; ++y) {
-      for (int x = -10; x < 10; ++x) {
-        var tileData = _tilemap.GetTile(new Vector3Int(x, y, 0));
-        if (tileData != null) {
-          Debug.Log(tileData);
-          return tileData;
-        }
-      }
-    }
-    return null;
-  }
+
 }
