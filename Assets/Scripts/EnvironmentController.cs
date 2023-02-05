@@ -24,8 +24,7 @@ public class EnvironmentController : MonoBehaviour
 
         // modify the world
         if (!_tilemap.HasTile(pos)) {
-            Tile dirtTile = dirt;
-            _tilemap.SetTile(pos, dirtTile);
+            _tilemap.SetTile(pos, dirt);
         }
     }
 
