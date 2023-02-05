@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class EnvironmentController : MonoBehaviour
-{
+public class EnvironmentController: MonoBehaviour {
+    [SerializeField]
+    AudioManager _audioManager;
+
     [SerializeField]
     Tile bedrock;
 
@@ -24,6 +26,7 @@ public class EnvironmentController : MonoBehaviour
 
         // modify the world
         if (!_tilemap.HasTile(pos)) {
+            _audioManager.PlaySound(_audioManager.Build);
             _tilemap.SetTile(pos, dirt);
         }
     }
@@ -40,21 +43,25 @@ public class EnvironmentController : MonoBehaviour
             if (_tilemap.GetTile(pos) != bedrock) {
                 _tilemap.SetTile(pos, null);
             }
-        } 
+        }
         //dig to the side
-        else 
-        // if (Math.Abs(runInput) > 0.1)
-         {
+        else
+            // if (Math.Abs(runInput) > 0.1)
+        {
             // need to check rotation of the character (facing forward or back)
             if (facingRight) {
-            pos = new Vector3Int(Mathf.FloorToInt(playerTransform.position.x + 1), Mathf.FloorToInt(playerTransform.position.y), 0);
-            } else {
-            pos = new Vector3Int(Mathf.FloorToInt(playerTransform.position.x - 1), Mathf.FloorToInt(playerTransform.position.y), 0);
+                pos = new Vector3Int(Mathf.FloorToInt(playerTransform.position.x + 1), Mathf.FloorToInt(playerTransform.position.y), 0);
+            }
+            else {
+                pos = new Vector3Int(Mathf.FloorToInt(playerTransform.position.x - 1), Mathf.FloorToInt(playerTransform.position.y), 0);
             }
             if (_tilemap.GetTile(pos) != bedrock) {
+                _audioManager.PlaySound(_audioManager.Dig);
                 _tilemap.SetTile(pos, null);
             }
-      }
+            else {
+                _audioManager.PlaySound(_audioManager.Clang);
+            }
+        }
     }
-
 }
