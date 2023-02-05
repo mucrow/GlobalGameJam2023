@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] GameObject back;
     [SerializeField] GameObject forth;
     float phase = 0;
-    float speed = 1;
+    [SerializeField] float speed = 1;
     float phaseDirection = 1;
 
     // Update is called once per frame
