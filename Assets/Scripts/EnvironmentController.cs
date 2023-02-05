@@ -41,7 +41,11 @@ public class EnvironmentController: MonoBehaviour {
             // basically it's (player.x, player.y - 1)
             pos = new Vector3Int(Mathf.FloorToInt(playerTransform.position.x), Mathf.FloorToInt(playerTransform.position.y - 1), 0);
             if (_tilemap.GetTile(pos) != bedrock) {
+                _audioManager.PlaySound(_audioManager.Dig);
                 _tilemap.SetTile(pos, null);
+            }
+            else {
+                _audioManager.PlaySound(_audioManager.Clang);
             }
         }
         //dig to the side
