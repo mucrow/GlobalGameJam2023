@@ -10,7 +10,7 @@ public class EnvironmentController : MonoBehaviour
     Tile bedrock;
 
     [SerializeField]
-    Tile dirt;
+    Tile[] dirt;
     
     [SerializeField]
     Tilemap _tilemap;
@@ -18,7 +18,7 @@ public class EnvironmentController : MonoBehaviour
     
     public void buildTile(Transform playerTransform)
     {
-        var tileData = FindATile();
+        // var tileData = FindATile();
 
         // use the player's position to determine the target position of the tile we're placing
         // basically it's (player.x, player.y - 1)
@@ -27,7 +27,8 @@ public class EnvironmentController : MonoBehaviour
         // modify the world
 
         if (!_tilemap.HasTile(pos)) {
-            _tilemap.SetTile(pos, tileData);
+            Tile dirtTile = dirt[3];
+            _tilemap.SetTile(pos, dirtTile);
         }
     }
 
