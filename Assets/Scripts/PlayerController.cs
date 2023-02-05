@@ -23,11 +23,20 @@ public class PlayerController: MonoBehaviour {
 
   Vector2 _velocity = Vector2.zero;
 
+  [SerializeField]
+  GameObject _downSlashAnimation;
+  [SerializeField]
+  GameObject _forwardSlashAnimation;
+  [SerializeField]
+  GameObject _idleAnimation;
+  [SerializeField]
+  GameObject _runAnimation;
+
   void Update() {
     // Left Arrow, Right Arrow, the A key, or the D key. works for gamepads too
     var runInput = Input.GetAxis("Horizontal");
     var inputHorizontal = Input.GetAxisRaw("Horizontal");
-    var isDownPressed = Input.GetAxis("Vertical"); 
+    var isDownPressed = Input.GetAxis("Vertical");
 
     // spacebar
     var isJumpPressed = Input.GetButton("Jump");
@@ -46,14 +55,17 @@ public class PlayerController: MonoBehaviour {
       _velocity.x = runInput * RunSpeed;
       if (inputHorizontal > 0 && !facingRight) {
         Flip();
+        SetAnimationToRun();
       }
       if (inputHorizontal < 0 && facingRight) { 
         Flip();
+        SetAnimationToRun();
       }
     } 
     else {
       // stop if there isn't
       _velocity.x = 0;
+      SetAnimationToIdle();
     }
 
     // if the player is on the ground...
@@ -86,6 +98,12 @@ public class PlayerController: MonoBehaviour {
    // if the player pressed the dig button...
     if (isDigPressed) {
       _env.digTile(transform, facingRight, isDownPressed);
+      if (isDownPressed < -0.1) {
+        SetAnimationToDownSlash();
+      }
+      else {
+        SetAnimationToForwardSlash();
+      }
     }
 
   }
@@ -98,4 +116,31 @@ public class PlayerController: MonoBehaviour {
     facingRight = !facingRight;
   }
 
+  void SetAnimationToIdle() {
+    _downSlashAnimation.SetActive(false);
+    _forwardSlashAnimation.SetActive(false);
+    _runAnimation.SetActive(false);
+    _idleAnimation.SetActive(true);
+  }
+
+  void SetAnimationToRun() {
+    _downSlashAnimation.SetActive(false);
+    _forwardSlashAnimation.SetActive(false);
+    _idleAnimation.SetActive(false);
+    _runAnimation.SetActive(true);
+  }
+
+  void SetAnimationToDownSlash() {
+    _forwardSlashAnimation.SetActive(false);
+    _runAnimation.SetActive(false);
+    _idleAnimation.SetActive(false);
+    _downSlashAnimation.SetActive(true);
+  }
+
+  void SetAnimationToForwardSlash() {
+    _downSlashAnimation.SetActive(false);
+    _runAnimation.SetActive(false);
+    _idleAnimation.SetActive(false);
+    _forwardSlashAnimation.SetActive(true);
+  }
 }
